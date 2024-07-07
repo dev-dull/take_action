@@ -13,8 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+    - name: Build Docker image
+      run: docker build -t takeactionplayground:test .
+
+    - name: Run Docker image
+      run: docker run --rm takeactionplayground:test
+
+    # - name: Set up Docker Buildx
+    #   uses: docker/setup-buildx-action@v3
 
     # - name: Login to Docker Hub
     #   uses: docker/login-action@v3
@@ -22,9 +28,13 @@ jobs:
     #     username: ${{ secrets.DOCKERHUB_USERNAME }}
     #     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: false
-        tags: devdull/takeactionplayground:latest
+    # - name: Build and push
+    #   uses: docker/build-push-action@v6
+    #   with:
+    #     context: .
+    #     push: false
+    #     tags: devdull/takeactionplayground:latest
+    # - name: Run Docker image
+    #   run: |
+    #     docker pull devdull/takeactionplayground:latest
+    #     docker run --rm devdull/takeactionplayground:latest
