@@ -22,6 +22,12 @@ jobs:
     - name: Curl endpoint
       run: curl -s http://localhost/
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Version
+      run: terraform version
+
     - name: Clean up Docker environment
       run: docker kill $(docker ps -q)
 
