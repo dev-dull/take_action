@@ -30,7 +30,7 @@ jobs:
       run: terraform version
 
     - name: Check curl output
-      if: ${{ steps.curl_check.result == 'shades' }}
+      if: ${{ steps.curl_check.outputs.result == 'shades' }}
       run: echo "Yes, shades."
 
     - name: Clean up Docker environment
