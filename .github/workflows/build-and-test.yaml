@@ -17,7 +17,13 @@ jobs:
       run: docker build -t takeactionplayground:test .
 
     - name: Run Docker image
-      run: docker run --rm takeactionplayground:test
+      run: docker run -d -p 80:80 --rm takeactionplayground:test
+
+    - name: Curl endpoint
+      run: curl -s http://localhost/
+
+    - name: Clean up Docker environment
+      run: docker kill $(docker ps -q)
 
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v3
