@@ -20,13 +20,18 @@ jobs:
       run: docker run -d -p 80:80 --rm takeactionplayground:test
 
     - name: Curl endpoint
-      run: curl -s http://localhost/
+      id: curl_check
+      run: echo result=$(curl -s http://localhost/ | grep -o '<h1>:shades: it worked.</h1>' | grep -o 'shades') | tee -a $GITHUB_OUTPUT
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
     - name: Terraform Version
       run: terraform version
+
+    - name: Check curl output
+      if: ${{ steps.curl_check.result == 'shades' }}
+      run: echo "Yes, shades."
 
     - name: Clean up Docker environment
       run: docker kill $(docker ps -q)
