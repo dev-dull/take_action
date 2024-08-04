@@ -33,6 +33,10 @@ jobs:
       if: ${{ steps.curl_check.outputs.result == 'shades' }}
       run: echo "Yes, shades."
 
+    - name: Tag valid docker image
+      id: tag_docker
+      run: ddocker tag takeactionplayground:test takeactionplayground:release
+
     - name: Clean up Docker environment
       run: docker kill $(docker ps -q)
 
