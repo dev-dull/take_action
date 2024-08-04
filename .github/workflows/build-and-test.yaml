@@ -30,12 +30,12 @@ jobs:
       run: terraform version
 
     - name: Check curl output
-      if: ${{ steps.curl_check.outputs.result == 'shades' }}
-      run: echo "Yes, shades."
+      if: ${{ steps.curl_check.outputs.result != 'shades' }}
+      run: echo "Yes, shades." >&2; exit 1
 
     - name: Tag valid docker image
       id: tag_docker
-      run: ddocker tag takeactionplayground:test takeactionplayground:release
+      run: docker tag takeactionplayground:test takeactionplayground:release
 
     - name: Clean up Docker environment
       run: docker kill $(docker ps -q)
