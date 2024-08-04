@@ -39,7 +39,8 @@ jobs:
 
     - name: Set matrix
       id: set-matrix
-      run: "echo \"matrix=$(echo '${{ steps.curl_check.outputs.result }}' | jq -c '{listyStuff: .listyStuff}')\" >> $GITHUB_OUTPUT"
+      run: |
+        echo "matrix=$(echo '${{ steps.curl_check.outputs.result }}' | jq -c '{listyStuff: .listyStuff}')" >> $GITHUB_OUTPUT
 
     - name: Tag valid docker image
       id: tag_docker
