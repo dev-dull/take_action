@@ -21,7 +21,7 @@ jobs:
 
     - name: Curl endpoint
       id: curl_check
-      run: echo "result=$(curl -s http://localhost/ | grep -o 'shades')" | tee -a $GITHUB_OUTPUT
+      run: echo "result=$(curl -s http://localhost/ | grep -o shades)" | tee -a $GITHUB_OUTPUT
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
