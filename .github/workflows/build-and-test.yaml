@@ -21,7 +21,7 @@ jobs:
 
     - name: Curl endpoint
       id: curl_check
-      run: echo "result=$(curl -s http://localhost/ | tr '\n' ' ' | grep -o shades)" | tee -a $GITHUB_OUTPUT
+      run: echo "result=$(curl -s http://localhost/ | jq -c .)" | tee -a $GITHUB_OUTPUT
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -30,8 +30,8 @@ jobs:
       run: terraform version
 
     - name: Check curl output
-      if: ${{ steps.curl_check.outputs.result != 'shades' }}
-      run: echo "Yes, shades." >&2; exit 1
+      if: ${{ fromJson(steps.curl_check.outputs.result).shades == 'Shades' }}
+      run: echo "Yes, shades."
 
     - name: Tag valid docker image
       id: tag_docker
