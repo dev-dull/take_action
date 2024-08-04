@@ -34,6 +34,7 @@ jobs:
       run: echo "Yes, shades."
 
     - name: Echo list
+      # This bullshit nonsense will echo "Array" and not the contets of the array.
       run: echo ${{ fromJson(steps.curl_check.outputs.result).listyStuff }}
 
     - name: Tag valid docker image
