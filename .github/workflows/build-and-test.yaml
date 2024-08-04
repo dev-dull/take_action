@@ -48,6 +48,9 @@ jobs:
     - name: Clean up Docker environment
       run: docker kill $(docker ps -q)
 
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
   use_matrix:
     needs: build
     runs-on: ubuntu-latest
