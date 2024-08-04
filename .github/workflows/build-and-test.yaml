@@ -33,6 +33,9 @@ jobs:
       if: ${{ fromJson(steps.curl_check.outputs.result).shades == 'Shades' }}
       run: echo "Yes, shades."
 
+    - name: Echo list
+      run: echo ${{ fromJson(steps.curl_check.outputs.result).listyStuff }}
+
     - name: Tag valid docker image
       id: tag_docker
       run: docker tag takeactionplayground:test takeactionplayground:release
