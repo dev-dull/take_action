@@ -52,7 +52,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.process_array.outputs.matrix)}}
+      matrix: ${{fromJson(needs.build.outputs.matrix)}}
     steps:
       - name: Use array element
         run: echo "Current element is ${{ matrix.listyStuff }}"
