@@ -49,7 +49,7 @@ jobs:
       run: docker kill $(docker ps -q)
 
   use_matrix:
-    needs: process_array
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{fromJson(needs.process_array.outputs.matrix)}}
