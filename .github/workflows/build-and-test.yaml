@@ -5,7 +5,7 @@ on:
     inputs:
       test:
         description: random junk
-        # required: true
+        required: true
         default: junky junk
   push:
     branches: [ "main" ]
